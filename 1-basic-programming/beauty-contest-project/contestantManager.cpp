@@ -517,7 +517,6 @@ void printContestantsGroupedByAge(const Contestant contestants[], int numOfConte
 
     AgeCategories ageCategories = groupByAge(contestants, numOfContestants);
 
-
     cout << endl;
     cout << "--- Category 1 age " << AGE_GROUP_ONE_MIN << " - " << AGE_GROUP_ONE_MAX << " ---" << endl;
     if (ageCategories.countOfContestantsGroupAge14to16 == 0)
