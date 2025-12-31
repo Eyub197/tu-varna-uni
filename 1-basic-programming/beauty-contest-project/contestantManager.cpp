@@ -421,7 +421,7 @@ void loadFromFile(Contestant contestants[], int &numOfContestants) {
        cout << "Corrupted date in file. Couldn't read all the contestants date" << endl;
    } else {
       numOfContestants = countFromFile;
-      cout << "--- Succesfully loaded " << numOfContestants << " contestants from the file --- " << FILE_NAME << endl;
+      cout << "--- Successfully loaded " << numOfContestants << " contestants from the file --- " << FILE_NAME << endl;
    }
 
     inFile.close();

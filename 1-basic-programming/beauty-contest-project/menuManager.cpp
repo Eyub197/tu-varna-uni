@@ -108,7 +108,7 @@ int getValidMainMenuChoice() {
 
 void app() {
     int menuChoice;
-    int countOfContestants = 20;
+    int countOfContestants = 28;
 
 
     Contestant contestants[MAX_NUM_OF_CONTESTANTS] = {
@@ -131,7 +131,15 @@ void app() {
         {17, "Joseph Taylor", 22, "m", 112.0, 118.0, 39.0, 41.0},
         {18, "Mary Moore", 15, "f", 92.0, 98.0, 31.0, 33.0},
         {19, "Thomas Martin", 24, "m", 125.0, 130.0, 43.0, 45.0},
-        {20, "Karen Thompson", 18, "f", 96.0, 102.0, 32.0, 34.0}
+        {20, "Karen Thompson", 18, "f", 96.0, 102.0, 32.0, 34.0},
+        {21, "Ivan Petrov", 14, "m", 110.0, 110.0, 35.0, 38.0},
+        {22, "Maria Ivanova", 16, "f", 108.0, 100.0, 30.0, 35.0},
+        {23, "Georgi Dimitrov", 17, "m", 101.0, 120.0, 40.0, 42.0},
+        {24, "Elena Stoyanova", 19, "f", 93.0, 105.0, 32.0, 36.0},
+        {25, "Petar Georgiev", 20, "m", 120.0, 115.0, 38.0, 40.0},
+        {26, "Ivan Petrov", 22, "m", 108.0, 112.0, 36.0, 39.0},
+        {27, "Dimitar Angelov", 14, "m", 125.0, 108.0, 34.0, 37.0},
+        {28, "Victoria Koleva", 25, "f", 101.0, 102.0, 31.0, 34.0}
     };
 
     loadFromFile(contestants, countOfContestants);
