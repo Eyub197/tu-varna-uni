@@ -1,7 +1,6 @@
 #include "contestantManager.h"
 #include "constants.h"
 #include "utils.h"
-#include <ios>
 #include <iostream>
 #include <cstring>
 #include <fstream>
@@ -11,21 +10,16 @@ using namespace std;
 
 int getContestantsToAdd(int numOfContestants) {
     int countOfContestantsToAdd;
+    int maxContestantsToAdd = MAX_NUM_OF_CONTESTANTS - numOfContestants;
 
     do {
-        cout << "Enter how many contestants do you want to add: ";
-        cin >> countOfContestantsToAdd;
-
-        checkForSimpleNumber(countOfContestantsToAdd, "Enter how many contestants do you want to add: ");
-
-        if (MAX_NUM_OF_CONTESTANTS < numOfContestants + countOfContestantsToAdd)
-            cout << "The number of contestants must not exceed the maximum of " << MAX_NUM_OF_CONTESTANTS << " contestants" << endl;
-    } while (MAX_NUM_OF_CONTESTANTS < countOfContestantsToAdd + numOfContestants);
+        cout << "Enter how many contestants do you want to add (1 - " << maxContestantsToAdd << ") :" ;
+    } while (!isValidInt(countOfContestantsToAdd, 1, maxContestantsToAdd));
 
     return countOfContestantsToAdd;
 }
 
-int getUniqNumber (const Contestant contestants[], int index) {
+int getUniqNumber(const Contestant contestants[], int index) {
    int number;
    bool isDuplicateNumber;
 
@@ -69,6 +63,7 @@ void setName(char name[], int nameSize, string optionalMessage = "") {
 bool checkContestants(int numOfContestants) {
     if (numOfContestants <= 0) {
         cout << "There are no contestants" << endl;
+        cout << endl;
         return false;
     }
     return true;
@@ -108,7 +103,7 @@ float getCircumference(string typeOfCircumference, float min, float max) {
         }
 
         if (circumference < min || circumference > max) {
-            cout << "Invalid value. " << typeOfCircumference << " cirfumference must be between "  << min << "cm" << " and " << max << "cm" << endl;
+            cout << "Invalid value. " << typeOfCircumference << " circumference must be between "  << min << "cm" << " and " << max << "cm" << endl;
         }
 
     } while (circumference < min || circumference > max);
@@ -122,25 +117,45 @@ float findScore(const Contestant contestant) {
     return contestant.hipCircumference / denominator;
 }
 
-void printContestant(Contestant contestant) {
-    cout << "Number: " << contestant.number << endl;
-    cout << "Name: " << contestant.name << endl;
-    cout << "Age: " << contestant.age  << endl;
-    cout << "Gender: " << contestant.gender << endl;
-    cout << "Hip circumference: " << fixed << setprecision(1) << contestant.hipCircumference << endl;
-    cout << "Shoulder circumference: " << fixed << setprecision(1) << contestant.shoulderCircumference << endl;
-    cout << "Neck circumference: " << fixed << setprecision(1) << contestant.neckCircumference << endl;
-    cout << "Calf circumference: " << fixed << setprecision(1) << contestant.calfCircumference << endl;
-    cout << "Score (P): " << fixed << setprecision(2) << findScore(contestant) << endl;
-    cout << endl;
+void printTableHeader() {
+    cout << left << setw(10) << "Number"
+         << setw(20) << "Name"
+         << setw(5) << "Age"
+         << setw(8) << "Gender"
+         << setw(20) << "Hip Circumference"
+         << setw(25) << "Shoulder Circumference"
+         << setw(20) << "Neck Circumference"
+         << setw(20) << "Calf Circumference"
+         << setw(10) << "Score (P)" << endl;
+    cout << setfill('-') << setw(138) << "" << setfill(' ') << endl;
+}
+
+void printContestantInTable(Contestant contestant) {
+    cout << left << setw(10) << contestant.number
+         << setw(20) << contestant.name
+         << setw(5) << contestant.age
+         << setw(8) << contestant.gender
+         << fixed << setprecision(1) << setw(20) << contestant.hipCircumference
+         << setw(25) << contestant.shoulderCircumference
+         << setw(20) << contestant.neckCircumference
+         << setw(20) << contestant.calfCircumference
+         << fixed << setprecision(2) << setw(10) << findScore(contestant) << endl;
 }
 
 void printContestants(const Contestant contestants[], int numOfContestants) {
-    cout << endl;
-    for (int contestant = 0; contestant < numOfContestants; contestant++) {
-       printContestant(contestants[contestant]);
+    if (numOfContestants == 0) {
+        cout << "No contestants to display." << endl;
+        return;
     }
+
+    cout << endl;
+    printTableHeader();
+    for (int i = 0; i < numOfContestants; ++i) {
+        printContestantInTable(contestants[i]);
+    }
+    cout << endl;
 }
+
 
 int getYoungestAge (const Contestant contestants[], int numOfContestants) {
     int youngestAge = 1000;
@@ -153,7 +168,7 @@ int getYoungestAge (const Contestant contestants[], int numOfContestants) {
     return youngestAge;
 }
 
-void copyArrayWithDiffrentIndexes(const Contestant originalArray[], Contestant arrayToCopy[], int indexOne, int indexTwo) {
+void copyArrayWithDifferentIndexes(const Contestant originalArray[], Contestant arrayToCopy[], int indexOne, int indexTwo) {
     arrayToCopy[indexTwo].number = originalArray[indexOne].number;
     strcpy(arrayToCopy[indexTwo].name, originalArray[indexOne].name);
     arrayToCopy[indexTwo].age = originalArray[indexOne].age;
@@ -165,7 +180,7 @@ void copyArrayWithDiffrentIndexes(const Contestant originalArray[], Contestant a
 }
 
 void copyArray(const Contestant originalArray[], Contestant arrayToCopy[], int index) {
-    copyArrayWithDiffrentIndexes(originalArray, arrayToCopy, index, index);
+   copyArrayWithDifferentIndexes (originalArray, arrayToCopy, index, index);
 }
 
 void sortByAgeAndName(Contestant arrayToSort[], int numOfContestants) {
@@ -192,15 +207,15 @@ ScoreCategories categorizeByScore(const Contestant contestants[], int numOfConte
         float score = findScore(contestants[contestant]);
 
         if (score >= WINNER_SCORE_MIN && score <=  WINNER_SCORE_MAX) {
-            copyArrayWithDiffrentIndexes(contestants, categories.winners, contestant, categories.countOfWinners);
+            copyArrayWithDifferentIndexes(contestants, categories.winners, contestant, categories.countOfWinners);
             categories.countOfWinners++;
         }
         else if (score >= WINNER_SCORE_MAX) {
-            copyArrayWithDiffrentIndexes(contestants, categories.highP, contestant, categories.countOfHighP);
+            copyArrayWithDifferentIndexes(contestants, categories.highP, contestant, categories.countOfHighP);
             categories.countOfHighP++;
         }
         else  {
-            copyArrayWithDiffrentIndexes(contestants, categories.lowP, contestant, categories.countOfLowP);
+            copyArrayWithDifferentIndexes(contestants, categories.lowP, contestant, categories.countOfLowP);
             categories.countOfLowP++;
         }
     }
@@ -237,18 +252,18 @@ AgeCategories groupByAge(const Contestant contestants[], int numOfContestants) {
 
     for (int contestant = 0; contestant < numOfContestants; contestant++) {
         if (contestants[contestant].age >= AGE_GROUP_ONE_MIN && contestants[contestant].age <= AGE_GROUP_ONE_MAX) {
-            copyArrayWithDiffrentIndexes(contestants, ageCategories.contestantsGroupAge14to16, contestant, ageCategories.countOfContestantsGroupAge14to16);
+            copyArrayWithDifferentIndexes(contestants, ageCategories.contestantsGroupAge14to16, contestant, ageCategories.countOfContestantsGroupAge14to16);
             ageCategories.countOfContestantsGroupAge14to16++;
         } else if (contestants[contestant].age >= AGE_GROUP_TWO_MIN && contestants[contestant].age <= AGE_GROUP_TWO_MAX) {
-            copyArrayWithDiffrentIndexes(contestants, ageCategories.contestantsGroupAge17to19, contestant, ageCategories.countOfContestantsGroupAge17to19);
+            copyArrayWithDifferentIndexes(contestants, ageCategories.contestantsGroupAge17to19, contestant, ageCategories.countOfContestantsGroupAge17to19);
             ageCategories.countOfContestantsGroupAge17to19++;
         }
         else if (contestants[contestant].age >= AGE_GROUP_THREE_MIN && contestants[contestant].age <= AGE_GROUP_THREE_MAX) {
-            copyArrayWithDiffrentIndexes(contestants, ageCategories.contestantsGroupAge20to22, contestant, ageCategories. countOfContestantsGroupAge20to22);
+            copyArrayWithDifferentIndexes(contestants, ageCategories.contestantsGroupAge20to22, contestant, ageCategories. countOfContestantsGroupAge20to22);
             ageCategories.countOfContestantsGroupAge20to22++;
         }
         else if (contestants[contestant].age >= AGE_GROUP_FOUR_MIN && contestants[contestant].age <= AGE_GROUP_FOUR_MAX){
-            copyArrayWithDiffrentIndexes(contestants, ageCategories.contestantsGroupAge23to25, contestant, ageCategories.countOfContestantsGroupAge23to25);
+            copyArrayWithDifferentIndexes(contestants, ageCategories.contestantsGroupAge23to25, contestant, ageCategories.countOfContestantsGroupAge23to25);
             ageCategories.countOfContestantsGroupAge23to25++;
         }
     }
@@ -257,9 +272,9 @@ AgeCategories groupByAge(const Contestant contestants[], int numOfContestants) {
 }
 
 void addContestants(Contestant contestants[], int &numOfContestants) {
-    int countOfContestansToAdd = getContestantsToAdd(numOfContestants);
+    int countOfContestantsToAdd = getContestantsToAdd(numOfContestants);
 
-    for (int contestant = numOfContestants; contestant < numOfContestants + countOfContestansToAdd; contestant++) {
+    for (int contestant = numOfContestants; contestant < numOfContestants + countOfContestantsToAdd; contestant++) {
         cout << "Entering information about contestants number " << contestant + 1 << endl;
         contestants[contestant].number = getUniqNumber(contestants, contestant);
         cin.ignore();
@@ -273,8 +288,10 @@ void addContestants(Contestant contestants[], int &numOfContestants) {
         cout << endl;
     }
 
-    numOfContestants += countOfContestansToAdd;
+    numOfContestants += countOfContestantsToAdd;
     cout << endl;
+
+    cout << "--- " << countOfContestantsToAdd << " contestants added successfully" << endl;
 }
 
 void printAllContestants(const Contestant contestants[], int numOfContestants) {
@@ -284,17 +301,19 @@ void printAllContestants(const Contestant contestants[], int numOfContestants) {
     printContestants(contestants, numOfContestants);
 }
 
-void printYoungestContestants(const Contestant contestants[], int numOfContestestants) {
-    if (!checkContestants(numOfContestestants)) {
+void printYoungestContestants(const Contestant contestants[], int numOfContestants) {
+    if (!checkContestants(numOfContestants)) {
         return;
     }
-    int youngestAge = getYoungestAge(contestants, numOfContestestants);
+
+    int youngestAge = getYoungestAge(contestants, numOfContestants);
 
     cout << endl;
     cout << "--- Results ---" << endl;
-    for (int contestant = 0; contestant < numOfContestestants; contestant++) {
-        if(contestants[contestant].age == youngestAge) {
-            printContestant(contestants[contestant]);
+    printTableHeader();
+    for (int contestant = 0; contestant < numOfContestants; contestant++) {
+        if (contestants[contestant].age == youngestAge) {
+            printContestantInTable(contestants[contestant]);
         }
     }
 }
@@ -309,10 +328,11 @@ void searchContestantByName(const Contestant contestants[], int numOfContestants
 
     setName(nameToSearchFor, 50, "Enter the name that you are searching for: ");
 
+    printTableHeader();
     for (int contestant = 0; contestant < numOfContestants; contestant++) {
         if (strcmp(contestants[contestant].name, nameToSearchFor) == 0) {
             cout << endl;
-            printContestant(contestants[contestant]);
+            printContestantInTable(contestants[contestant]);
             foundContestant = true;
         }
     }
@@ -320,7 +340,6 @@ void searchContestantByName(const Contestant contestants[], int numOfContestants
     if (!foundContestant) {
         cout << "There is no contestant with this name" << endl;
     }
-
 }
 
 void sortByAge(Contestant contestants[], int numOfContestants) {
@@ -338,30 +357,30 @@ void sortByAge(Contestant contestants[], int numOfContestants) {
         }
     }
 
-    cout << "--- Sorted array succsefully ---" << endl;
+    cout << "--- Sorted array successfully ---" << endl;
     cout << endl;
 }
 
-void saveToFile(const Contestant contestants[], int numOfcontestants) {
-    if (!checkContestants(numOfcontestants)) {
+void saveToFile(const Contestant contestants[], int numOfContestants) {
+    if (!checkContestants(numOfContestants)) {
         return;
     }
 
     ofstream outFile(FILE_NAME, ios::out | ios::binary);
 
-    if(!outFile) {
+    if (!outFile) {
         cout << "Something went wrong while opening the file" << endl;
         return;
     }
 
-    outFile.write((char*)&numOfcontestants, sizeof(int));
+    outFile.write((char*)&numOfContestants, sizeof(int));
 
-    outFile.write((char*)contestants, sizeof(Contestant) * numOfcontestants);
+    outFile.write((char*)contestants, sizeof(Contestant) * numOfContestants);
 
     if (outFile)
-       cout << "--- Successfully saved " << numOfcontestants << " contestants to --- " << FILE_NAME << endl;
+       cout << "--- Successfully saved " << numOfContestants << " contestants to --- " << FILE_NAME << endl;
     else
-        cout << "An error occured while writing to the file" << endl;
+        cout << "An error occurred while writing to the file" << endl;
 
     outFile.close();
 }
@@ -370,12 +389,7 @@ void loadFromFile(Contestant contestants[], int &numOfContestants) {
     ifstream inFile(FILE_NAME, ios::in | ios::binary);
 
     if (!inFile.good()) {
-        cout << "No contestants file found, starting with an empty list." << endl;
-        return;
-    }
-
-    if (!inFile) {
-        cout << "Something went wrong with the file" << endl;
+        cout << "No contestants file found" << endl;
         return;
     }
 
@@ -396,7 +410,6 @@ void loadFromFile(Contestant contestants[], int &numOfContestants) {
     }
 
     if (countFromFile == 0) {
-        numOfContestants = 0;
         cout << "There are no contestants saved in the file" << endl;
         inFile.close();
         return;
@@ -444,9 +457,10 @@ void searchContestantByAgeAndGender(const Contestant contestants[], int numOfCon
 
     cout << endl;
     cout << "--- Results ---" << endl;
+    printTableHeader();
     for (int contestant = 0; contestant < numOfContestants; contestant++) {
         if(contestants[contestant].age == ageToSearchFor && strcmp(contestants[contestant].gender, genderToSearchFor) == 0) {
-            printContestant(contestants[contestant]);
+            printContestantInTable(contestants[contestant]);
             foundContester = true;
         }
     }
@@ -459,22 +473,14 @@ void searchContestantByAgeAndGender(const Contestant contestants[], int numOfCon
 void findWinnerForCategory(const Contestant contestants[], int numOfContestants) {
 
     if (!checkContestants(numOfContestants)) {
-
         return;
-
     }
 
     ScoreCategories categories = categorizeByScore(contestants, numOfContestants);
 
-
-
     sortByScoreDescending(categories.winners, categories.countOfWinners);
-
     sortByScoreAscending(categories.highP, categories.countOfHighP);
-
     sortByScoreAscending(categories.lowP, categories.countOfLowP);
-
-
 
     cout << "--- Winners (Score: " << fixed << setprecision(2) << WINNER_SCORE_MIN << "-" << WINNER_SCORE_MAX << ") ---" << endl;
 
