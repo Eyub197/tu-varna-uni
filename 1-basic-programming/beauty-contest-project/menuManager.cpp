@@ -2,6 +2,7 @@
 #include "contestantManager.h"
 #include "constants.h"
 #include "utils.h"
+#include <cstring>
 #include <iostream>
 #include <string>
 
@@ -108,39 +109,9 @@ int getValidMainMenuChoice() {
 
 void app() {
     int menuChoice;
-    int countOfContestants = 28;
+    int countOfContestants = 0;
 
-
-    Contestant contestants[MAX_NUM_OF_CONTESTANTS] = {
-        {1, "John Smith", 21, "m", 116.0, 120.0, 40.0, 40.0},
-        {2, "Emily Jones", 18, "f", 95.4, 95.0, 30.0, 34.0},
-        {3, "Michael Brown", 24, "m", 135.2, 125.0, 42.0, 41.0},
-        {4, "Jessica Davis", 20, "f", 102.0, 90.0, 28.0, 32.0},
-        {5, "David Wilson", 19, "m", 110.0, 130.0, 45.0, 45.0},
-        {6, "Sarah Miller", 22, "f", 85.7, 100.0, 32.0, 36.0},
-        {7, "Chris Lee", 20, "m", 99.6, 110.0, 35.0, 36.0},
-        {8, "Emily Jones", 17, "f", 96.8, 98.0, 31.0, 35.0},
-        {9, "Daniel Garcia", 17, "m", 117.1, 115.0, 38.0, 39.0},
-        {10, "Laura Rodriguez", 20, "f", 80.1, 92.0, 29.0, 33.0},
-        {11, "James White", 23, "m", 120.5, 128.0, 41.0, 42.0},
-        {12, "Linda Harris", 20, "f", 88.0, 92.0, 29.0, 33.0},
-        {13, "Robert Martinez", 16, "m", 105.0, 110.0, 36.0, 38.0},
-        {14, "Patricia Anderson", 25, "f", 110.0, 115.0, 38.0, 40.0},
-        {15, "Charles Thomas", 14, "m", 90.0, 100.0, 30.0, 32.0},
-        {16, "Jennifer Jackson", 19, "f", 98.0, 105.0, 33.0, 35.0},
-        {17, "Joseph Taylor", 22, "m", 112.0, 118.0, 39.0, 41.0},
-        {18, "Mary Moore", 15, "f", 92.0, 98.0, 31.0, 33.0},
-        {19, "Thomas Martin", 24, "m", 125.0, 130.0, 43.0, 45.0},
-        {20, "Karen Thompson", 18, "f", 96.0, 102.0, 32.0, 34.0},
-        {21, "Ivan Petrov", 14, "m", 110.0, 110.0, 35.0, 38.0},
-        {22, "Maria Ivanova", 16, "f", 108.0, 100.0, 30.0, 35.0},
-        {23, "Georgi Dimitrov", 17, "m", 101.0, 120.0, 40.0, 42.0},
-        {24, "Elena Stoyanova", 19, "f", 93.0, 105.0, 32.0, 36.0},
-        {25, "Petar Georgiev", 20, "m", 120.0, 115.0, 38.0, 40.0},
-        {26, "Ivan Petrov", 22, "m", 108.0, 112.0, 36.0, 39.0},
-        {27, "Dimitar Angelov", 14, "m", 125.0, 108.0, 34.0, 37.0},
-        {28, "Victoria Koleva", 25, "f", 101.0, 102.0, 31.0, 34.0}
-    };
+    Contestant contestants[MAX_NUM_OF_CONTESTANTS] = { };
 
     loadFromFile(contestants, countOfContestants);
 
@@ -162,3 +133,5 @@ void app() {
         }
     } while (menuChoice != 8);
 }
+
+char name[23];

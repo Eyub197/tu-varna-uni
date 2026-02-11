@@ -157,7 +157,7 @@ void printContestants(const Contestant contestants[], int numOfContestants) {
 }
 
 
-int getYoungestAge (const Contestant contestants[], int numOfContestants) {
+int getYoungestAge(const Contestant contestants[], int numOfContestants) {
     int youngestAge = 1000;
 
     for (int contestant = 0; contestant < numOfContestants; contestant++) {
