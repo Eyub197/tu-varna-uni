@@ -1,2 +1,8 @@
+# for i in range(8):
+#     print("*" * i)
+
+
 for i in range(8):
-    print("*" * i)
+    for j in range(i):
+        print("*", end="")
+print("")
