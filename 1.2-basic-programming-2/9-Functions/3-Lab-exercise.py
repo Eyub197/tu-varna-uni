@@ -1,5 +1,9 @@
 def sum_list(list):
-    return sum(list)
+    sum = 0
+    for number in list:
+        sum += number
+
+    return sum
 
 
-print(sum_list([3, 4, 5, 6, 7]))
+print(sum_list([3, 7]))
