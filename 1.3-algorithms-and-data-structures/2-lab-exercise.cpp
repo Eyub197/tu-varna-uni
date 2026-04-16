@@ -45,9 +45,8 @@ void populateMatrix(int matrix[20][20], int n) {
   }
 }
 
-int main() {
-  int matrix[20][20];
+int matrix[20][20];
 
-  const int n = getN();
-  populateMatrix(matrix, n);
-}
+const int n = getN();
+populateMatrix(matrix, n);
+int main() {}
