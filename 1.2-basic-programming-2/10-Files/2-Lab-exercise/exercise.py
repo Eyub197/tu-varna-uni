@@ -20,9 +20,9 @@ def find_avarage_grade(student_dict):
 student_dict = dict()
 counter = 0
 
-with open("studentrs.txt", "r") as file:
+with open("students.txt", "r") as file:
     for line in file:
         student_dict[counter] = list(line.split(" "))
         counter += 1
 
-find_avarage_grade(student_dict)
+print_student_info(student_dict)
