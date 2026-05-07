@@ -62,3 +62,15 @@ int main() {
 
   return 0;
 }
+
+int popPractice(int& num, elem*& temp) {
+  if (temp) {
+    num = temp->key;
+    p = temp;
+    temp = temp->next;
+    delete p;
+    return 1;
+  } else {
+    return 0;
+  }
+}

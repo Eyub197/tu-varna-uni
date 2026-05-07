@@ -31,6 +31,7 @@ int pop(int& n, elem*& temp) {
     temp = temp->next;
     delete p;
     return 1;
+    2
   } else {
     return 0;
   }

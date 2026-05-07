@@ -75,6 +75,7 @@ int deque(int& n, elem*& first, elem*& last) {
     return 0;
   }
 }
+
 void push_l(int n);  // prototype
 void push_r(int n);  // prototype
 int pop_l(int& n);   // prototype
@@ -194,4 +195,18 @@ int main() {
   displayDeck(rightt);
 
   return 0;
+}
+
+int dequePractice(int& num, elem*& head, elem*& tail) {
+  if (head) {
+    p = head;
+    num = head->key;
+    head = head->next;
+
+    if (head == NULL) last = head;
+    delete p;
+    return 1;
+  } else {
+    return 0;
+  }
 }
