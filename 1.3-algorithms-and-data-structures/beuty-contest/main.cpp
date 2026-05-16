@@ -1,5 +1,6 @@
 #include <cstddef>
 #include <iostream>
+#include <new>
 #include <string>
 
 #include "list.h"
@@ -72,6 +73,14 @@ void handleSubmenuSearches(Contestant*& head, Contestant contestants[],
   } while (optionThreeSubmenuChoice != 3);
 }
 
+void handleSortedPrintingByAgeAndName(Contestant*& head,
+                                      Contestant contestnats[],
+                                      int numOfContestants) {
+  copyAllElementsIntroArray(head, contestnats);
+  selectionSort(contestnats, numOfContestants);
+  printContestants(contestnats, numOfContestants);
+}
+
 int main() {
   int menuChoice;
   int countOfContestants = 0;
@@ -96,7 +105,7 @@ int main() {
         handleSort(head, contestants);
         break;
       case 5:
-        cout << "ask the teacher lookups";
+        handleSortedPrintingByAgeAndName(head, contestants, countOfContestants);
         break;
       case 6:
         cout << "Thank you for using the program :)" << endl;

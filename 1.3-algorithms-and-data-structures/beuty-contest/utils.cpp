@@ -104,9 +104,35 @@ int binarySearch(Contestant contestants[], int numOfContestants,
   return -1;
 }
 
+void selectionSort(Contestant contestants[], int size) {
+  for (int step = 0; step < size - 1; step++) {
+    int min_idx = step;
+
+    for (int i = step + 1; i < size; i++) {
+      if (contestants[i].age < contestants[min_idx].age) min_idx = i;
+      if (contestants[i].age == contestants[min_idx].age) {
+        if ((strcmp(contestants[i].name, contestants[min_idx].name)) < 0)
+          min_idx = i;
+      }
+    }
+
+    Contestant temp = contestants[min_idx];
+    contestants[min_idx] = contestants[step];
+    contestants[step] = temp;
+  }
+}
+
 void printContestant(Contestant contestant[], int indexOfContestant) {
   cout << left << setw(10) << contestant[indexOfContestant].number << setw(20)
        << contestant[indexOfContestant].name << setw(5)
        << contestant[indexOfContestant].age << setw(8)
        << contestant[indexOfContestant].gender << fixed << endl;
+}
+
+void printContestants(Contestant contestant[], int size) {
+  for (int i = 0; i < size; i++) {
+    cout << left << setw(10) << contestant[i].number << setw(20)
+         << contestant[i].name << setw(5) << contestant[i].age << setw(8)
+         << contestant[i].gender << fixed << endl;
+  }
 }
