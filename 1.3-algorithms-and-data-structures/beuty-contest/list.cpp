@@ -12,7 +12,29 @@
 
 using namespace std;
 
-void add(Contestant*& head, int currentNumberOfContestants) {
+void printTableHeader() {
+  cout << left << setw(10) << "Number" << setw(20) << "Name" << setw(5) << "Age"
+       << setw(8) << "Gender" << setw(20) << endl;
+  cout << setfill('-') << setw(138) << "" << setfill(' ') << endl;
+}
+
+void print(Contestant*& head) {
+  Contestant* helper = head;
+  cout << endl;
+  printTableHeader();
+  if (!head) return;
+
+  while (helper) {
+    cout << setw(10) << helper->number;
+    cout << setw(20) << helper->name;
+    cout << setw(5) << helper->age;
+    cout << setw(8) << helper->gender;
+    helper = helper->next;
+    cout << endl;
+  }
+}
+
+void addStart(Contestant*& head, int& currentNumberOfContestants) {
   int newNumber;
   char name[NAME_MAX];
   int age;
@@ -46,6 +68,108 @@ void add(Contestant*& head, int currentNumberOfContestants) {
 
     cout << "Enter an age: ";
     cin >> age;
+    newContestant->age = age;
+
+    cout << "Enter a gender (m or f) ";
+    cin >> gender;
+    strcpy(newContestant->gender, gender);
+    newContestant->next = helper;
+    head = newContestant;
+
+    cout << endl;
+  }
+  currentNumberOfContestants += contestantsToAdd;
+}
+
+void addMiddle(Contestant*& head, int& currentNumberOfContestants) {
+  int newNumber;
+  char name[NAME_MAX];
+  int age;
+  char gender[GENDER_LENGTH];
+  int contestantsToAdd;
+  int numberToAddAfter;
+
+  cout << "Enter the number after which you want to add the contestant: ";
+  cin >> numberToAddAfter;
+
+  cout << "Enter how many contestants you want to add: ";
+  cin >> contestantsToAdd;
+
+  if (currentNumberOfContestants + contestantsToAdd > MAX_NUM_OF_CONTESTANTS) {
+    cout << "You cant add that much of contestants the maximum is"
+         << MAX_NUM_OF_CONTESTANTS;
+
+    return;
+  }
+
+  for (int contestant = 0; contestant < contestantsToAdd; contestant++) {
+    cout << "Entering contestnant number " << contestant + 1 << endl;
+    cout << endl;
+
+    Contestant *helper = head, *newContestant = head;
+    newContestant = new Contestant;
+
+    cout << "Enter a number: ";
+    cin >> newNumber;
+    newContestant->number = newNumber;
+
+    cout << "Enter  a name: ";
+    cin >> name;
+    strcpy(newContestant->name, name);
+
+    cout << "Enter an age: ";
+    cin >> age;
+    newContestant->age = age;
+
+    cout << "Enter a gender (m or f) ";
+    cin >> gender;
+
+    strcpy(newContestant->gender, gender);
+
+    while (helper->number != numberToAddAfter) helper = helper->next;
+    newContestant->next = helper->next;
+    helper->next = newContestant;
+  }
+
+  currentNumberOfContestants += contestantsToAdd;
+  cout << endl;
+}
+
+void addEnd(Contestant*& head, int& currentNumberOfContestants) {
+  int newNumber;
+  char name[NAME_MAX];
+  int age;
+  char gender[GENDER_LENGTH];
+  int contestantsToAdd;
+
+  cout << "Enter how many contestants you want to add: ";
+  cin >> contestantsToAdd;
+
+  if (currentNumberOfContestants + contestantsToAdd > MAX_NUM_OF_CONTESTANTS) {
+    cout << "You cant add that much of contestants the maximum is"
+         << MAX_NUM_OF_CONTESTANTS;
+
+    return;
+  }
+
+  for (int contestant = 0; contestant < contestantsToAdd; contestant++) {
+    cout << "Entering contestnant number " << contestant + 1 << endl;
+    cout << endl;
+
+    Contestant *helper = head, *newContestant = head;
+    newContestant = new Contestant;
+
+    cout << "Enter a number: ";
+    cin >> newNumber;
+    newContestant->number = newNumber;
+
+    cout << "Enter  a name: ";
+    cin >> name;
+    strcpy(newContestant->name, name);
+
+    cout << "Enter an age: ";
+    cin >> age;
+    newContestant->age = age;
 
     cout << "Enter a gender (m or f) ";
     cin >> gender;
@@ -62,32 +186,11 @@ void add(Contestant*& head, int currentNumberOfContestants) {
     }
   }
 
+  currentNumberOfContestants += contestantsToAdd;
   cout << endl;
 }
 
-void printTableHeader() {
-  cout << left << setw(10) << "Number" << setw(20) << "Name" << setw(5) << "Age"
-       << setw(8) << "Gender" << setw(20) << endl;
-  cout << setfill('-') << setw(138) << "" << setfill(' ') << endl;
-}
-
-void print(Contestant*& head) {
-  Contestant* helper = head;
-  cout << endl;
-  printTableHeader();
-  if (!head) return;
-
-  while (helper) {
-    cout << setw(10) << helper->number;
-    cout << setw(20) << helper->name;
-    cout << setw(5) << helper->age;
-    cout << setw(8) << helper->gender;
-    helper = helper->next;
-    cout << endl;
-  }
-}
-
-int remove(Contestant*& head) {
+int removeEnd(Contestant*& head) {
   Contestant *contestantToRemove = NULL, *helper = head;
 
   if (head) {
