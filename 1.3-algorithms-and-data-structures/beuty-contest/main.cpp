@@ -1,6 +1,5 @@
 #include <cstddef>
 #include <iostream>
-#include <new>
 #include <string>
 
 #include "list.h"
@@ -44,7 +43,7 @@ void handleSearchByName(Contestant*& head, Contestant contestants[],
   cin.getline(name, 30);
   copyAllElementsIntroArray(head, contestants);
   int nameIndex = binarySearch(contestants, numOfContestants, name);
-  printContestant(contestants, nameIndex);
+  printContestantWithIndex(contestants, nameIndex);
 }
 
 void handleSubmenuSearches(Contestant*& head, Contestant contestants[],
@@ -81,6 +80,39 @@ void handleSortedPrintingByAgeAndName(Contestant*& head,
   printContestants(contestnats, numOfContestants);
 }
 
+void handleSearchByAgeAndGender(Contestant*& head, Contestant contestants[],
+                                int numOfContestants) {
+  copyAllElementsIntroArray(head, contestants);
+  insertionSort(contestants, numOfContestants);
+  searchByAgeAndGender(contestants, numOfContestants);
+}
+
+void handleSubmenuLookups(Contestant*& head, Contestant contestants[],
+                          int numOfContestants) {
+  int optionThreeSubmenuChoice;
+
+  do {
+    do {
+      printSubmenu(3, "Print contestatnts sorted by age and name",
+                   "Search contestants by age and gender");
+      cout << "Your choice: ";
+    } while (!isValidInt(optionThreeSubmenuChoice, 1, 3));
+
+    switch (optionThreeSubmenuChoice) {
+      case 1:
+        handleSortedPrintingByAgeAndName(head, contestants, numOfContestants);
+        break;
+      case 2:
+        handleSearchByAgeAndGender(head, contestants, numOfContestants);
+        break;
+      case 3:
+        cout << "You came back to the main menu" << endl;
+        cout << endl;
+        break;
+    }
+  } while (optionThreeSubmenuChoice != 3);
+}
+
 int main() {
   int menuChoice;
   int countOfContestants = 0;
@@ -105,7 +137,7 @@ int main() {
         handleSort(head, contestants);
         break;
       case 5:
-        handleSortedPrintingByAgeAndName(head, contestants, countOfContestants);
+        handleSubmenuLookups(head, contestants, countOfContestants);
         break;
       case 6:
         cout << "Thank you for using the program :)" << endl;
@@ -115,3 +147,5 @@ int main() {
 
   return 0;
 }
+
+// TODO rename the submenu option 3 to its coresponding name

@@ -10,6 +10,26 @@ using namespace std;
 
 void clearBuffer() { cin.ignore(numeric_limits<streamsize>::max(), '\n'); }
 
+void printContestantWithIndex(Contestant contestant[], int indexOfContestant) {
+  cout << left << setw(10) << contestant[indexOfContestant].number << setw(20)
+       << contestant[indexOfContestant].name << setw(5)
+       << contestant[indexOfContestant].age << setw(8)
+       << contestant[indexOfContestant].gender << fixed << endl;
+}
+
+void printContestant(Contestant contestant) {
+  cout << left << setw(10) << contestant.number << setw(20) << contestant.name
+       << setw(5) << contestant.age << setw(8) << contestant.gender << fixed
+       << endl;
+}
+
+void printContestants(Contestant contestant[], int size) {
+  for (int i = 0; i < size; i++) {
+    cout << left << setw(10) << contestant[i].number << setw(20)
+         << contestant[i].name << setw(5) << contestant[i].age << setw(8)
+         << contestant[i].gender << fixed << endl;
+  }
+}
 bool isValidInt(int& result, int min, int max) {
   cin >> result;
 
@@ -122,17 +142,38 @@ void selectionSort(Contestant contestants[], int size) {
   }
 }
 
-void printContestant(Contestant contestant[], int indexOfContestant) {
-  cout << left << setw(10) << contestant[indexOfContestant].number << setw(20)
-       << contestant[indexOfContestant].name << setw(5)
-       << contestant[indexOfContestant].age << setw(8)
-       << contestant[indexOfContestant].gender << fixed << endl;
+void insertionSort(Contestant contestatns[], int n) {
+  int j;
+  Contestant key;
+
+  for (int i = 1; i < n; i++) {
+    key = contestatns[i];
+    j = i - 1;
+
+    while (j >= 0 && (contestatns[j].age > key.age ||
+                      (contestatns[j].age == key.age &&
+                       strcmp(contestatns[j].gender, key.gender) > 0))) {
+      contestatns[j + 1] = contestatns[j];
+      j = j - 1;
+    }
+
+    contestatns[j + 1] = key;
+  }
 }
 
-void printContestants(Contestant contestant[], int size) {
-  for (int i = 0; i < size; i++) {
-    cout << left << setw(10) << contestant[i].number << setw(20)
-         << contestant[i].name << setw(5) << contestant[i].age << setw(8)
-         << contestant[i].gender << fixed << endl;
+void searchByAgeAndGender(Contestant contestants[], int size) {
+  int age;
+  char gender[GENDER_LENGTH];
+  cout << "Enter age: ";
+  cin >> age;
+  cout << "Enter gender: ";
+  cin >> gender;
+
+  for (int contestant = 0; contestant < size; contestant++) {
+    if (contestants[contestant].age == age &&
+        strcmp(contestants[contestant].gender, gender) == 0) {
+      printContestant(contestants[contestant]);
+    }
   }
+  cout << endl;
 }
