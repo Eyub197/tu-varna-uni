@@ -106,13 +106,13 @@ int remove(Contestant*& head) {
 }
 
 void seed(Contestant*& head, int& numOfContestants) {
-  const char* names[15] = {"Name: 1",  "Name: 2",  "Name: 3",  "Name: 4",
-                           "Name: 5",  "Name: 6",  "Name: 7",  "Name: 8",
-                           "Name: 9",  "Name: 10", "Name: 11", "Name: 12",
-                           "Name: 13", "Name: 14", "Name: 15"};
+  const char* names[15] = {"Emma", "George", "Sophia", "Michael", "Olivia",
+                           "William", "Isabella", "Robert", "Mia", "Thomas",
+                           "Ava", "Daniel", "Charlotte", "Anthony", "Lily"};
 
-  const char* genders[15] = {"m", "f", "m", "f", "m", "m", "f", "m",
-                             "m", "f", "m", "m", "f", "m", "m"};
+  const char* genders[15] = {"f", "m", "f", "m", "f",
+                             "m", "f", "m", "f", "m",
+                             "f", "m", "f", "m", "f"};
 
   const int ages[15] = {14, 22, 15, 20, 18, 16, 19, 17,
                         14, 21, 15, 18, 20, 16, 17};
@@ -139,4 +139,26 @@ void seed(Contestant*& head, int& numOfContestants) {
   }
 
   numOfContestants += 15;
+}
+
+void copyFirst10ElementsIntoArray(Contestant*& head, Contestant contestants[]) {
+  Contestant* helper = head;
+  int count = 0;
+
+  while (helper && count < 10) {
+    contestants[count] = *helper;
+    helper = helper->next;
+    count++;
+  }
+}
+
+void copyAllElementsIntroArray(Contestant*& head, Contestant contestants[]) {
+  Contestant* helper = head;
+  int count = 0;
+
+  while (helper) {
+    contestants[count] = *helper;
+    helper = helper->next;
+    count++;
+  }
 }

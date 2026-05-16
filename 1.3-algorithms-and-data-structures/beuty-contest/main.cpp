@@ -1,54 +1,11 @@
 #include <cstddef>
-#include <iomanip>
 #include <iostream>
-#include <limits>
 #include <string>
 
 #include "list.h"
+#include "utils.h"
 
 using namespace std;
-
-void clearBuffer() { cin.ignore(numeric_limits<streamsize>::max(), '\n'); }
-
-bool isValidInt(int& result, int min, int max) {
-  cin >> result;
-
-  if (!cin) {
-    cin.clear();
-    clearBuffer();
-    cout << "Invalid input. Please enter a number" << endl;
-    return false;
-  }
-
-  if (result < min || result > max) {
-    clearBuffer();
-    cout << "Invalid number. Your number should be between " << min << " to "
-         << max << endl;
-    return false;
-  }
-
-  clearBuffer();
-  return true;
-}
-
-void printMainMenu() {
-  cout << "--- MENU ---" << endl;
-  cout << "1. Add or remove" << endl;
-  cout << "2. Print all contestants" << endl;
-  cout << "3. Print youngest contestants or search one by name" << endl;
-  cout << "4. Sort by age" << endl;
-  cout << "5. Lookups" << endl;
-  cout << "6. Leave" << endl;
-}
-
-void printSubmenu(int numOfSubmenu, string optionOneText,
-                  string optionTwoText) {
-  cout << endl;
-  cout << "--- Option " << numOfSubmenu << " submenu ---" << endl;
-  cout << "1. " << optionOneText << endl;
-  cout << "2. " << optionTwoText << endl;
-  cout << "3. Leave submenu" << endl;
-}
 
 void handleSubmenuOperations(Contestant*& head, int numOfContestants) {
   int optionThreeSubmenuChoice;
@@ -74,22 +31,25 @@ void handleSubmenuOperations(Contestant*& head, int numOfContestants) {
   } while (optionThreeSubmenuChoice != 3);
 }
 
-int getValidMainMenuChoice() {
-  int menuChoice;
-  printMainMenu();
-  do {
-    cout << "Your choice: ";
-  } while (!isValidInt(menuChoice, 1, 8));
-
-  return menuChoice;
+void handleSort(Contestant*& head, Contestant contestants[]) {
+  copyFirst10ElementsIntoArray(head, contestants);
+  exchangeSort(contestants);
 }
 
-void handleSort(Contestant*& head) {}
+void handleSearchByName(Contestant*& head, Contestant contestants[],
+                        int numOfContestants) {
+  char name[30];
+  cout << "Enter the name to search: ";
+  cin.getline(name, 30);
+  copyAllElementsIntroArray(head, contestants);
+  int nameIndex = binarySearch(contestants, numOfContestants, name);
+  printContestant(contestants, nameIndex);
+}
 
 int main() {
   int menuChoice;
   int countOfContestants = 0;
-
+  Contestant contestants[10];
   Contestant* head = NULL;
 
   do {
@@ -104,10 +64,10 @@ int main() {
         print(head);
         break;
       case 3:
-        cout << "ask the teacher searchsj";
+        handleSearchByName(head, contestants, countOfContestants);
         break;
       case 4:
-        handleSort(head);
+        handleSort(head, contestants);
         break;
       case 5:
         cout << "ask the teacher lookups";
@@ -116,7 +76,7 @@ int main() {
         cout << "Thank you for using the program :)" << endl;
         break;
     }
-  } while (menuChoice != 5);
+  } while (menuChoice != 6);
 
   return 0;
 }

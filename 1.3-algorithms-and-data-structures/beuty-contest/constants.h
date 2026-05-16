@@ -1,4 +1,8 @@
 #include <cstddef>
+
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
+
 const int MAX_NUM_OF_CONTESTANTS = 30;
 
 const int NAME_MIN = 2;
@@ -13,3 +17,5 @@ struct Contestant {
   char gender[GENDER_LENGTH];
   struct Contestant* next;
 };
+
+#endif /* CONSTANTS_H */
