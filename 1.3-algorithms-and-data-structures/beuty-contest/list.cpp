@@ -1,5 +1,3 @@
-#include <pthread.h>
-
 #include <cstddef>
 #include <cstdio>
 #include <cstdlib>
@@ -190,6 +188,42 @@ void addEnd(Contestant*& head, int& currentNumberOfContestants) {
   cout << endl;
 }
 
+int removeStart(Contestant*& head) {
+  Contestant* helper = head;
+
+  if (head) {
+    head = head->next;
+    delete helper;
+    return 1;
+  } else
+    return 0;
+}
+
+int removeMiddle(Contestant*& head) {
+  Contestant *contestantToRemove = NULL, *helper = head;
+  int k;
+  cout << "Enter a number to remove: ";
+  cin >> k;
+
+  if (head) {
+    if (head->number == k) {
+      head = head->next;
+      delete helper;
+      return 1;
+    }
+
+    while (helper->number != k) {
+      contestantToRemove = helper;
+      helper = helper->next;
+    }
+
+    contestantToRemove->next = helper->next;
+    delete helper;
+    return 1;
+  } else
+    return 0;
+}
+
 int removeEnd(Contestant*& head) {
   Contestant *contestantToRemove = NULL, *helper = head;
 
@@ -255,7 +289,7 @@ void copyFirst10ElementsIntoArray(Contestant*& head, Contestant contestants[]) {
   }
 }
 
-void copyAllElementsIntroArray(Contestant*& head, Contestant contestants[]) {
+void copyAllElementsIntoArray(Contestant*& head, Contestant contestants[]) {
   Contestant* helper = head;
   int count = 0;
 

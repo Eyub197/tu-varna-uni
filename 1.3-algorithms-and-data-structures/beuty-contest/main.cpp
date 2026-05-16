@@ -34,6 +34,12 @@ void handleSubmenuOperations(Contestant*& head, int numOfContestants) {
       case 3:
         addEnd(head, numOfContestants);
         break;
+      case 4:
+        removeStart(head);
+        break;
+      case 5:
+        removeMiddle(head);
+        break;
       case 6:
         removeEnd(head);
         break;
@@ -55,7 +61,7 @@ void handleSearchByName(Contestant*& head, Contestant contestants[],
   char name[30];
   cout << "Enter the name to search: ";
   cin.getline(name, 30);
-  copyAllElementsIntroArray(head, contestants);
+  copyAllElementsIntoArray(head, contestants);
   int nameIndex = binarySearch(contestants, numOfContestants, name);
   printContestantWithIndex(contestants, nameIndex);
 }
@@ -89,14 +95,14 @@ void handleSubmenuSearches(Contestant*& head, Contestant contestants[],
 void handleSortedPrintingByAgeAndName(Contestant*& head,
                                       Contestant contestnats[],
                                       int numOfContestants) {
-  copyAllElementsIntroArray(head, contestnats);
+  copyAllElementsIntoArray(head, contestnats);
   selectionSort(contestnats, numOfContestants);
   printContestants(contestnats, numOfContestants);
 }
 
 void handleSearchByAgeAndGender(Contestant*& head, Contestant contestants[],
                                 int numOfContestants) {
-  copyAllElementsIntroArray(head, contestants);
+  copyAllElementsIntoArray(head, contestants);
   insertionSort(contestants, numOfContestants);
   searchByAgeAndGender(contestants, numOfContestants);
 }
