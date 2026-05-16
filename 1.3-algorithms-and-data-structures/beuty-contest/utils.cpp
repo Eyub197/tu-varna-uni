@@ -51,35 +51,6 @@ bool isValidInt(int& result, int min, int max) {
   return true;
 }
 
-void printMainMenu() {
-  cout << "--- MENU ---" << endl;
-  cout << "1. Add or remove" << endl;
-  cout << "2. Print all contestants" << endl;
-  cout << "3. Print youngest contestants or search one by name" << endl;
-  cout << "4. Sort by age" << endl;
-  cout << "5. Lookups" << endl;
-  cout << "6. Leave" << endl;
-}
-
-void printSubmenu(int numOfSubmenu, string optionOneText,
-                  string optionTwoText) {
-  cout << endl;
-  cout << "--- Option " << numOfSubmenu << " submenu ---" << endl;
-  cout << "1. " << optionOneText << endl;
-  cout << "2. " << optionTwoText << endl;
-  cout << "3. Leave submenu" << endl;
-}
-
-int getValidMainMenuChoice() {
-  int menuChoice;
-  printMainMenu();
-  do {
-    cout << "Your choice: ";
-  } while (!isValidInt(menuChoice, 1, 8));
-
-  return menuChoice;
-}
-
 void exchangeSort(Contestant contestants[]) {
   for (int i = 0; i < 10 - 1; i++) {
     for (int j = i + 1; j < 10; j++) {
