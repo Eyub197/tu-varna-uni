@@ -46,6 +46,32 @@ void handleSearchByName(Contestant*& head, Contestant contestants[],
   printContestant(contestants, nameIndex);
 }
 
+void handleSubmenuSearches(Contestant*& head, Contestant contestants[],
+                           int numOfContestants) {
+  int optionThreeSubmenuChoice;
+
+  do {
+    do {
+      printSubmenu(3, "Print all of the youngest contestatns",
+                   "Search by name");
+      cout << "Your choice: ";
+    } while (!isValidInt(optionThreeSubmenuChoice, 1, 3));
+
+    switch (optionThreeSubmenuChoice) {
+      case 1:
+        findAndPrintContestantsWithYoungestAge(head);
+        break;
+      case 2:
+        handleSearchByName(head, contestants, numOfContestants);
+        break;
+      case 3:
+        cout << "You came back to the main menu" << endl;
+        cout << endl;
+        break;
+    }
+  } while (optionThreeSubmenuChoice != 3);
+}
+
 int main() {
   int menuChoice;
   int countOfContestants = 0;
@@ -64,7 +90,7 @@ int main() {
         print(head);
         break;
       case 3:
-        handleSearchByName(head, contestants, countOfContestants);
+        handleSubmenuSearches(head, contestants, countOfContestants);
         break;
       case 4:
         handleSort(head, contestants);

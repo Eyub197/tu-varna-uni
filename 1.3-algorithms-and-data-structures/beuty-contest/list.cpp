@@ -106,13 +106,13 @@ int remove(Contestant*& head) {
 }
 
 void seed(Contestant*& head, int& numOfContestants) {
-  const char* names[15] = {"Emma", "George", "Sophia", "Michael", "Olivia",
-                           "William", "Isabella", "Robert", "Mia", "Thomas",
-                           "Ava", "Daniel", "Charlotte", "Anthony", "Lily"};
+  const char* names[15] = {"Emma",      "George",  "Sophia",   "Michael",
+                           "Olivia",    "William", "Isabella", "Robert",
+                           "Mia",       "Thomas",  "Ava",      "Daniel",
+                           "Charlotte", "Anthony", "Lily"};
 
-  const char* genders[15] = {"f", "m", "f", "m", "f",
-                             "m", "f", "m", "f", "m",
-                             "f", "m", "f", "m", "f"};
+  const char* genders[15] = {"f", "m", "f", "m", "f", "m", "f", "m",
+                             "f", "m", "f", "m", "f", "m", "f"};
 
   const int ages[15] = {14, 22, 15, 20, 18, 16, 19, 17,
                         14, 21, 15, 18, 20, 16, 17};
@@ -162,3 +162,28 @@ void copyAllElementsIntroArray(Contestant*& head, Contestant contestants[]) {
     count++;
   }
 }
+
+void findAndPrintContestantsWithYoungestAge(Contestant*& head) {
+  Contestant* helper = head;
+  int minAge = head->age;
+
+  while (helper) {
+    if (helper->age < minAge) minAge = helper->age;
+    helper = helper->next;
+  }
+
+  helper = head;
+  while (helper) {
+    if (helper->age == minAge) {
+      cout << setw(10) << helper->number;
+      cout << setw(20) << helper->name;
+      cout << setw(5) << helper->age;
+      cout << setw(8) << helper->gender;
+      cout << endl;
+      helper = helper->next;
+    } else
+      helper = helper->next;
+  }
+}
+
+// TODO better couts make them look good
