@@ -1,0 +1,1 @@
+g++ main.cpp utils.cpp menu.cpp list.cpp -o main && ./main

@@ -322,5 +322,3 @@ void findAndPrintContestantsWithYoungestAge(Contestant*& head) {
       helper = helper->next;
   }
 }
-
-// TODO better couts make them look good
