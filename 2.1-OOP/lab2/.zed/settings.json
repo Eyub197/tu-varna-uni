@@ -1,0 +1,19 @@
+{
+    "lsp": {
+        "jdtls": {
+            "initialization_options": {
+                "settings": {
+                    "java": {
+                        "configuration": {
+                            "updateBuildConfiguration": "automatic"
+                        },
+                        "project": {
+                            "sourcePaths": ["."],
+                            "outputPath": "bin"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
