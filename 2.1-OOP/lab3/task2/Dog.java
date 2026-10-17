@@ -1,10 +1,16 @@
 package task2;
 
-import task2.Animal;
-
 public class Dog extends Animal {
     private String breed;
     private int learnedCommands;
 
-    public Animal(String name, int age, double weight)
+    public Dog(String name, int age, double weight, String breed, int learnedCommands) {
+        super(name, age, weight);
+        this.breed = breed;
+        this.learnedCommands = learnedCommands;
+    }
+
+    public String getDogDescription() {
+        return super.getDescription() + " Breed, " + breed + " Learned commands " + learnedCommands;
+    }
 }

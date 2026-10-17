@@ -11,4 +11,19 @@ public class Animal {
         this.weight = weight;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public String getDescription() {
+        return "Name: " + name + ", Age: " + age + ", Weight: " + weight;
+    }
 }
