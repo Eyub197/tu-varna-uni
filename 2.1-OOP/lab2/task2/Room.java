@@ -28,4 +28,17 @@ public class Room {
     public double getHeight() {
         return height;
     }
+
+    public double calculateArea() {
+        return length * width;
+    }
+
+    public double calculateVolume() {
+        return length * width * height;
+    }
+
+    public String getDescription() {
+        return String.format("Room number: %s, length %s, width %s, height %s ", number, length, width, height);
+    }
+
 }
