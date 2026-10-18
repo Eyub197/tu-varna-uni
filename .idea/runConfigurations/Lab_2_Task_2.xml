@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Lab 2 - Task 2" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="task2.Application" />
+    <module name="oop-lab2" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../01_labs/testing-github-cli" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../01_labs/web-security" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../02_learning" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../03_products/GTTimesTexter" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../03_products/alarm-saver" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../03_products/bubble-sort-visualizer" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../03_products/carniovre-deal-finder-agent" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../03_products/life-tracking-system" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../03_products/obsidian-calendar-widget" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../03_products/polllunity" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../03_products/retainer-maneger" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../05_archive/highshool-sandor-petofi" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../05_archive/old-projects" vcs="Git" />
+  </component>
+</project>
