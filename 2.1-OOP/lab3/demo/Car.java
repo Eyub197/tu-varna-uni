@@ -33,7 +33,7 @@ public class Car extends Vehicle {
         return super.getVhicleDescription() + ", seats " + seats + ", automatic " + automatic;
     }
 
-    public double calculateCar:wqServiceCoast() {
+    public double calculateCarServiceCoast() {
         return super.calculateVehicleServiceCoast() + seats;
     }
 }

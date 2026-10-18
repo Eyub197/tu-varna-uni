@@ -12,6 +12,9 @@ public class Cat extends Animal {
 
     public String getCatDescription() {
         return "%s fur color %s ,indoor %s".formatted(super.getDescription(), furColor, indoor);
+    }
 
+    public double calculateCatDailyFood() {
+        return  super.calculateBaseDailyFood() + (indoor ? 1000 : 500);
     }
 }

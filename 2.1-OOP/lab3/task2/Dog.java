@@ -13,4 +13,8 @@ public class Dog extends Animal {
     public String getDogDescription() {
         return super.getDescription() + " Breed, " + breed + " Learned commands " + learnedCommands;
     }
+
+    public double calculateDogDailyFood() {
+        return  super.calculateBaseDailyFood() + breed.length() + learnedCommands * 2;
+    }
 }

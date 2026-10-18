@@ -26,4 +26,8 @@ public class Animal {
     public String getDescription() {
         return "Name: " + name + ", Age: " + age + ", Weight: " + weight;
     }
+
+    public double calculateBaseDailyFood() {
+        return weight * 30.35;
+    }
 }
