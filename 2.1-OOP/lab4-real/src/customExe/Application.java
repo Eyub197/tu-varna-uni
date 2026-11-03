@@ -28,7 +28,9 @@ public class Application {
         AnimalAction action = new SoundAction();
         System.out.println(action.execute(animal));
 
-
+        System.out.println(rex.describeMovement());
+        System.out.println(rio.describeMovement());
+        System.out.println(nemo.describeMovement());
 
     }
 }
