@@ -46,7 +46,7 @@ public class Article {
         this.editor = editor;
         this.editorsHistory.add(editor);
 
-        if(!this.author.equals(editor)) {
+        if (!this.author.equals(editor)) {
             this.editorsHistory.remove(editor);
         }
     }
@@ -58,9 +58,9 @@ public class Article {
     private int getEditsCount() {
         int count = 0;
 
-        for(String name: editorsHistory) {
-            if(!author.equals(name)) {
-                count ++;
+        for (String name : editorsHistory) {
+            if (!author.equals(name)) {
+                count++;
             }
 
         }

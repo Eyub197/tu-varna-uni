@@ -41,12 +41,28 @@ public class Article {
         comments.add(comment);
     }
 
-    private void edit(String editor, String newTitle) {
+    public void edit(String editor, String newTitle) {
         this.title = newTitle;
+        this.editor = editor;
         this.editorsHistory.add(editor);
 
-        if(!this.author.equals(editor)) {
+        if (!this.author.equals(editor)) {
             this.editorsHistory.remove(editor);
         }
+    }
+    private int getCommentsCount() {
+        return comments.size();
+    }
+
+    private int getEditsCount() {
+        int count = 0;
+
+        for (String name : editorsHistory) {
+            if (!author.equals(name)) {
+                count++;
+            }
+
+        }
+        return count;
     }
 }
